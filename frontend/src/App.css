@@ -1,0 +1,272 @@
+:root {
+  /* Core Colors */
+  --bg-dark: #050505;
+  --bg-panel: rgba(10, 15, 20, 0.6);
+  --bg-panel-hover: rgba(15, 25, 35, 0.7);
+  
+  /* Neon Accents */
+  --cyan-glow: #00f3ff;
+  --cyan-dim: rgba(0, 243, 255, 0.1);
+  --red-glow: #ff2a6d;
+  --red-dim: rgba(255, 42, 109, 0.1);
+  --green-glow: #05ffa1;
+  --green-dim: rgba(5, 255, 161, 0.1);
+  --yellow-glow: #ffea00;
+  --purple-glow: #bd00ff;
+  
+  /* Text */
+  --text-primary: #e0fbfc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  /* Borders & Effects */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-neon: rgba(0, 243, 255, 0.4);
+  --box-shadow-neon: 0 0 10px rgba(0, 243, 255, 0.2), 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+/* --- Layout & Typography --- */
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
+  background-image: 
+    linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.font-cyber {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+/* --- HUD Panels (Replacing Cards) --- */
+.hud-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  /* Cut corners effect using clip-path */
+  clip-path: polygon(
+    0 0, 
+    100% 0, 
+    100% calc(100% - 20px), 
+    calc(100% - 20px) 100%, 
+    0 100%
+  );
+  transition: all 0.3s ease;
+}
+
+/* Decorative corner markers */
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--cyan-glow);
+  border-left: 2px solid var(--cyan-glow);
+  z-index: 2;
+}
+
+.hud-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid var(--cyan-glow);
+  border-right: 2px solid var(--cyan-glow);
+  /* Adjust for clip-path */
+  transform: translate(-5px, -5px); 
+  z-index: 2;
+}
+
+.hud-panel:hover {
+  background: var(--bg-panel-hover);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.05);
+  border-color: rgba(0, 243, 255, 0.2);
+}
+
+/* Variant: Danger */
+.hud-panel.danger {
+  border-color: rgba(255, 42, 109, 0.2);
+}
+.hud-panel.danger::before,
+.hud-panel.danger::after {
+  border-color: var(--red-glow);
+}
+
+/* Variant: Success */
+.hud-panel.success {
+  border-color: rgba(5, 255, 161, 0.2);
+}
+.hud-panel.success::before,
+.hud-panel.success::after {
+  border-color: var(--green-glow);
+}
+
+/* --- Cyber Cards (Boxy Design) --- */
+.cyber-card {
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cyber-card:hover {
+  background: var(--bg-panel-hover);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+  border-color: rgba(0, 243, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Variant: Danger */
+.cyber-card.danger {
+  border-color: rgba(255, 42, 109, 0.3);
+}
+.cyber-card.danger:hover {
+  box-shadow: 0 0 20px rgba(255, 42, 109, 0.15);
+  border-color: var(--red-glow);
+}
+
+/* Variant: Success */
+.cyber-card.success {
+  border-color: rgba(5, 255, 161, 0.3);
+}
+.cyber-card.success:hover {
+  box-shadow: 0 0 20px rgba(5, 255, 161, 0.15);
+  border-color: var(--green-glow);
+}
+
+/* --- Inputs --- */
+.cyber-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cyber-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  border-bottom: 2px solid var(--border-glass);
+  color: var(--cyan-glow);
+  padding: 15px 20px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+  outline: none;
+  background: rgba(0, 243, 255, 0.05);
+  border-bottom-color: var(--cyan-glow);
+  box-shadow: 0 10px 20px -10px var(--cyan-dim);
+}
+
+.cyber-input::placeholder {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* --- Buttons --- */
+.btn-cyber {
+  background: linear-gradient(45deg, transparent 5%, var(--cyan-glow) 5%);
+  color: #000;
+  border: none;
+  padding: 10px 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-cyber:hover {
+  background: linear-gradient(45deg, transparent 5%, #fff 5%);
+  color: #000;
+  box-shadow: 0 0 15px var(--cyan-glow);
+  transform: translateY(-2px);
+}
+
+.btn-cyber:disabled {
+  background: linear-gradient(45deg, transparent 5%, #555 5%);
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-cyber-outline {
+  background: transparent;
+  color: var(--cyan-glow);
+  border: 1px solid var(--cyan-glow);
+  padding: 8px 20px;
+  text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+  transition: all 0.3s ease;
+}
+
+.btn-cyber-outline:hover {
+  background: var(--cyan-dim);
+  color: #fff;
+  box-shadow: 0 0 15px var(--cyan-dim);
+}
+
+/* --- Utilities --- */
+.text-glow { text-shadow: 0 0 10px currentColor; }
+.text-cyan { color: var(--cyan-glow) !important; }
+.text-red { color: var(--red-glow) !important; }
+.text-green { color: var(--green-glow) !important; }
+.text-yellow { color: var(--yellow-glow) !important; }
+
+.section-title {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  height: 3px;
+  background: var(--cyan-glow);
+  box-shadow: 0 0 10px var(--cyan-glow);
+}
+
+/* --- Animations --- */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 5px var(--cyan-dim); }
+  50% { box-shadow: 0 0 20px var(--cyan-dim); }
+  100% { box-shadow: 0 0 5px var(--cyan-dim); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
